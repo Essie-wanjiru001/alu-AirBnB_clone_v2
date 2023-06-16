@@ -79,7 +79,10 @@ class Place(BaseModel, Base):
 
         @amenities.setter
         def amenities(self, obj):
-            """setter attribute amenities that handles append method for adding"""
+            """
+            setter attribute amenities that handles,
+            append method for adding
+            """
             from models.amenity import Amenity
             if type(obj) == type(Amenity):
                 self.amenity_ids.append(obj.id)
