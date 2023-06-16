@@ -25,8 +25,6 @@ class ConsoleTestCase(unittest.TestCase):
         with patch('sys.stdout', self.stdout):
             self.console.onecmd('create State name="California"')
         state_id = self.stdout.getvalue()[:-1]
-        # print(state_id)
-        # print(len(state_id))
         self.assertTrue(len(state_id) == 36)
 
     def test_create_save(self):
@@ -73,10 +71,6 @@ class ConsoleTestCase(unittest.TestCase):
         state_id = self.stdout.getvalue()[:-1]
         with patch('sys.stdout', self.stdout):
             self.console.onecmd('destroy State {}'.format(state_id))
-        # with patch('sys.stdout', self.stdout):
-        #     self.console.onecmd('show State {}'.format(state_id))
-        # self.assertEqual("** no instance found **\n",
-        #                  self.stdout.getvalue())
 
     def test_show(self):
         """test show"""
