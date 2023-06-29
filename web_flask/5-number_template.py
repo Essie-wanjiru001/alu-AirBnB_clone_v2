@@ -1,65 +1,62 @@
 #!/usr/bin/python3
-""" This is the 6th Flask setup script. """
+"""
+    python script that starts a Flask web application
+"""
 
 from flask import Flask, render_template
-
 app = Flask(__name__)
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/')
 def hello():
     """
-        Flask route at root.
-        Displays 'Hello HBNB!'.
+        Return: string when route queried
     """
-    return "Hello HBNB!"
+    return 'Hello HBNB!'
 
 
-@app.route('/hbnb', strict_slashes=False)
+@app.route('/hbnb')
 def hbnb():
     """
-        Flask route at /hbnb.
-        Displays 'HBNB'.
+        Return: string when route queried
     """
-    return "HBNB"
+    return 'HBNB'
 
 
-@app.route('/c/<text>', strict_slashes=False)
-def c(text):
+@app.route('/c/<text>')
+def c_is_fun(text):
     """
-        Flask route at /c/<text>.
-        Displays 'C + <text>'.
+        Return: reformatted text
     """
-    return "C {}".format(text.replace('_', ' '))
+    return 'C ' + text.replace('_', ' ')
 
 
-@app.route('/python', strict_slashes=False)
-@app.route('/python/<text>', strict_slashes=False)
-def python(text="is cool"):
+@app.route('/python/')
+@app.route('/python/<text>')
+def python_with_text(text='is cool'):
     """
-        Flask route at /python/(<text>).
-        Displays 'Python + <text>'.
-        Default value of <text> : 'is cool'.
+        Return: formatted text based on optional variable
     """
-    return "Python {}".format(text.replace('_', ' '))
+    return 'Python ' + text.replace('_', ' ')
 
 
-@app.route('/number/<int:n>', strict_slashes=False)
-def number(n):
+@app.route('/number/<int:n>')
+def number(n=None):
     """
-        Flask route at /number/<n>.
-        Displays '<n> + is an number' if <n> is a int.
+        Return: string if n is an integer
     """
-    return "{} is a number".format(n)
+    return str(n) + ' is a number'
 
 
-@app.route('/number_template/<int:n>', strict_slashes=False)
+@app.route('/number_template/<int:n>')
 def number_template(n):
     """
-        Flask route at /number_template/<n>.
-        Displays the 5-number.html template wiht value of <n>.
+        Return: HTML page if n is an integer
     """
-    return render_template('5-number.html', number=n)
+    path = '5-number.html'
+    return render_template(path, n=n)
+
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000)
+    app.url_map.strict_slashes = False
+    app.run(host='0.0.0.0', port=5000)
